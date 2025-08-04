@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Markdown Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="main-content">
+            <div class="markdown-viewer" id="markdown-viewer">
+                <div class="welcome-message">
+                    <h2>Minimal Markdown Viewer</h2>
+                    <p>Select a Markdown file from the sidebar to start reading.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resizer" id="resizer"></div>
+        
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Files</h2>
+            </div>
+            <div class="file-tree" id="file-tree">
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <span class="loading-text">Discovering files...</span>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="dark-mode-toggle">
+                    <div class="toggle-center">
+                        <input type="checkbox" id="dark-mode-checkbox" class="toggle-checkbox">
+                        <label for="dark-mode-checkbox" class="toggle-label">
+                            <span class="toggle-inner"></span>
+                            <span class="toggle-switch">
+                                <span class="toggle-emoji"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <span class="update-indicator" id="update-indicator">+</span>
+                    <a href="https://github.com/xpiu/minimal-markdown-viewer" target="_blank" class="info-link" title="View licenses on GitHub">𝒊</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

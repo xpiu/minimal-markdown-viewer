@@ -1,0 +1,21 @@
+{
+  "name": "minimal-markdown-viewer",
+  "version": "1.0.0",
+  "description": "Markdown file viewer for local documentation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": ["markdown", "viewer", "documentation"],
+  "author": "",
+  "license": "MIT"
+} 
