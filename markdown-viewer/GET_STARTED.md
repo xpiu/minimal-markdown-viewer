@@ -10,15 +10,14 @@ A simple, lightweight tool that turns any folder with Markdown files into a brow
 - 🏢 Business document repositories
 - 📁 Any folder with `.md` files
 
-## Quick Start (3 steps!)
+## Quick Start
 
-### Step 1: Get Node.js
-If you don't have Node.js installed:
+### Installation
+You'll need Node.js to run this tool. If you don't have it:
 - Visit [nodejs.org](https://nodejs.org) and download the LTS version
 - Install it (takes 2-3 minutes)
 
-### Step 2: Set it up
-Open your terminal and run these commands:
+Once Node.js is installed, open your terminal (Command Prompt on Windows, Terminal on Mac/Linux) and navigate to the `markdown-viewer` folder:
 
 ```bash
 # Navigate to the markdown-viewer folder
@@ -26,15 +25,22 @@ cd markdown-viewer
 
 # Install dependencies (one-time setup)
 npm install
+```
+
+### Running the Markdown Viewer
+Open your terminal (or Command Prompt on Windows, Terminal on Mac/Linux), make sure you're in the `markdown-viewer` folder, then start the program:
+
+```bash
+# Make sure you're in the right folder, if not:
+cd markdown-viewer
 
 # Start the viewer
 npm start
 ```
 
-### Step 3: Open in browser
-Go to `http://localhost:3000` in your web browser
+Now open your web browser and go to `http://localhost:3000`
 
-**That's it!** 🎉 You should see all your `.md` files in a beautiful file tree on the right side.
+**That's it!** You should see all your `.md` files.
 
 ## What you'll see
 
@@ -48,7 +54,7 @@ Go to `http://localhost:3000` in your web browser
 Want to add this to an existing project with lots of documentation?
 
 1. **Copy the `markdown-viewer` folder** into your project root
-2. **Run the setup** (Steps 2-3 above)
+2. **Run the setup only when you need it**
 3. **Share with your team** - anyone can access the docs at `localhost:3000`
 
 Your project structure might look like:
@@ -67,15 +73,6 @@ my-awesome-project/
 
 ## Troubleshooting
 
-**Don't have Node.js and can't install it?**
-You can still use a basic Python server:
-```bash
-# From your project root
-python3 -m http.server 8000
-# Then visit: http://localhost:8000/markdown-viewer/
-```
-(Note: This won't auto-detect new files)
-
 **Files not showing up?**
 - Make sure they end with `.md`
 - The viewer ignores system folders like `.git` and `node_modules`
@@ -91,6 +88,8 @@ python3 -m http.server 8000
 - Open an issue on GitHub
 - The tool is designed to be simple - if it's not working, something's probably misconfigured
 
-</br>
+## Screenshot
+
+![Minimal Markdown Viewer Interface](screenshot.png)
 
 ---

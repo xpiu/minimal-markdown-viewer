@@ -230,8 +230,6 @@ class MarkdownViewer {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
     }
     
-    // This method is now replaced by the new createFolderItem above
-    
     attachEventListeners() {
         const fileItems = this.fileTree.querySelectorAll('.file-item');
         const folders = this.fileTree.querySelectorAll('.folder');

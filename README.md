@@ -6,7 +6,7 @@ Browse and read Markdown files locally in the browser. Useful mini-tool to add t
 
 ## Benefits
 
-- **💧 Drop-in simplicity**: Just drop the markdown-viewer folder into any of your project folders - NO setup, NO installation, NO configuration
+- **💧 Drop-in simplicity**: Just drop the markdown-viewer folder into any of your project folders. - NO setup, NO installation, NO configuration
 - **🌐 Always available**: Lives with your project, accessible to any team member with browser access
 - **🎯 Project-focused**: Designed for browsing documentation within existing codebases, not standalone editing
 - **🪶 Lightweight alternative**: Simpler than heavy documentation generators or standalone markdown editors
@@ -38,19 +38,6 @@ Browse and read Markdown files locally in the browser. Useful mini-tool to add t
 4. **Automatic discovery**: The app automatically finds and displays all `.md` files
 5. **Real-time updates**: File tree updates automatically when you add/remove/modify files
 
-### Use local static file server (Alternative)
-If Node.js is not available, you can still use a basic file server:
-```bash
-# Navigate to the parent directory
-cd /path/to/your-project
-
-# Start a static server
-python3 -m http.server 8000
-# or: npx serve .
-
-# Open http://localhost:8000/markdown-viewer/
-```
-Note: Static server mode uses fallback file discovery and won't detect new files automatically.
 
 ### Note
 
@@ -83,7 +70,7 @@ The viewer **automatically discovers all Markdown files** in your repository, in
 - **Modern JavaScript**: ES6+ classes, async/await, fetch API
 - **Intelligent polling**: 3-second intervals with smart change detection
 - **Visual feedback**: Animated notifications and file metadata tooltips
-- **Graceful fallback**: Works offline with static file list when server unavailable
+- **Graceful fallback**: Continues working when server is temporarily unavailable
 
 ## Browser Compatibility
 

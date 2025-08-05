@@ -1,6 +1,6 @@
 {
   "name": "minimal-markdown-viewer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Markdown file viewer for local documentation",
   "main": "server.js",
   "scripts": {
@@ -16,6 +16,6 @@
     "nodemon": "^3.0.1"
   },
   "keywords": ["markdown", "viewer", "documentation"],
-  "author": "",
+  "author": "xpiu",
   "license": "MIT"
 } 
