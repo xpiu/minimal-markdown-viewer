@@ -85,7 +85,7 @@ my-awesome-project/
 ## Need help?
 
 - Check the main [README.md](README.md) for technical details
-- Open an issue on GitHub
+- Open an issue on GitHub: [https://github.com/xpiu/minimal-markdown-viewer](https://github.com/xpiu/minimal-markdown-viewer)
 - The tool is designed to be simple - if it's not working, something's probably misconfigured
 
 ## Screenshot
