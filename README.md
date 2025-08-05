@@ -6,20 +6,22 @@ Browse and read Markdown files locally in the browser. Useful mini-tool to add t
 
 ## Benefits
 
-- **💧 Drop-in simplicity**: Just drop the markdown-viewer folder into any of your project folders. - NO setup, NO installation, NO configuration
+- **💧 Drop-in simplicity**: Just drop the markdown-viewer folder into any of your project folders.
 - **🌐 Always available**: Lives with your project, accessible to any team member with browser access
 - **🎯 Project-focused**: Designed for browsing documentation within existing codebases, not standalone editing
 - **🪶 Lightweight alternative**: Simpler than heavy documentation generators or standalone markdown editors
-- **📜 Open Source**: MIT licence
+- **🤖 Accomodating AI's love for Markdown**
+- **📜 MIT licence**
 
 ## Features
 
 - **🔄 Dynamic File Discovery**: Automatically scans and discovers all Markdown files in the repository
+- **🏍️ Easy to start in a local folder**: Run npm start and visit http://localhost:3000 to begin browsing your Markdown Files.
 - **⚡ Real-time Updates**: Detects file additions, deletions, and modifications every 3 seconds
 - **📁 Smart File Tree**: Organized sidebar with folder structure and enhanced display names
 - **💾 File Metadata**: Shows file sizes, modification dates, and hover tooltips
-- **🎨 Professional, minimal look**: Corporate look. Dark mode support.
-- **⚙️ Node.js Server**: Built-in Express server with intelligent file system scanning
+- **🎨 Professional, minimal look**: Minimal look. Dark mode toggle available.
+- **⚙️ Node.js server**: Built-in Express server with intelligent file system scanning
 
 ## How to Use
 
