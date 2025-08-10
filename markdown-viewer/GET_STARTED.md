@@ -88,8 +88,10 @@ my-awesome-project/
 - Open an issue on GitHub: [https://github.com/xpiu/minimal-markdown-viewer](https://github.com/xpiu/minimal-markdown-viewer)
 - The tool is designed to be simple - if it's not working, something's probably misconfigured
 
-## Screenshot
+## Screenshots
 
-![Minimal Markdown Viewer Interface](screenshot.png)
+![Minimal Markdown Viewer Interface 1](screenshot-1.png)
+
+![Minimal Markdown Viewer Interface 1](screenshot-2.png)
 
 ---

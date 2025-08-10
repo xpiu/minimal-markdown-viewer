@@ -2,7 +2,9 @@
 
 Browse and read Markdown files locally in the browser. Useful mini-tool to add to any project folder with multiple Markdown files. Only loads Markdown (.md) files. Uses the marked.js (CDN) and Node.js for Markdown parsing.
 
-![Minimal Markdown Viewer Interface](/markdown-viewer/screenshot.png)
+![Minimal Markdown Viewer Interface screenshot 1](/markdown-viewer/screenshot-1.png)
+
+![Minimal Markdown Viewer Interface screenshot 2](/markdown-viewer/screenshot-2.png)
 
 ## Benefits
 
