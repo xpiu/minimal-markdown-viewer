@@ -8,6 +8,8 @@ class MarkdownViewer {
         this.fileList = [];
         this.refreshInterval = null;
         this.currentPopover = null;
+        this.focusedPath = null;
+        this.focusIndex = -1;
         
         this.init();
     }
@@ -132,6 +134,7 @@ class MarkdownViewer {
         
         this.fileTree.innerHTML = html;
         this.attachEventListeners();
+        this.restoreFocusAfterRender();
     }
 
     buildFolderStructure(files) {
@@ -241,6 +244,7 @@ class MarkdownViewer {
             item.addEventListener('click', () => {
                 const path = item.dataset.path;
                 const name = item.dataset.name;
+                this.setFocusedItem(item);
                 this.loadMarkdownFile(path, name);
             });
             
@@ -258,21 +262,130 @@ class MarkdownViewer {
         
         // Add keyboard navigation for file tree
         this.fileTree.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-                e.preventDefault();
-                const scrollStep = 30;
-                if (e.key === 'ArrowUp') {
-                    this.fileTree.scrollTop -= scrollStep;
-                } else {
-                    this.fileTree.scrollTop += scrollStep;
+            const isArrowUp = e.key === 'ArrowUp';
+            const isArrowDown = e.key === 'ArrowDown';
+            const isEnter = e.key === 'Enter';
+            if (!isArrowUp && !isArrowDown && !isEnter) return;
+
+            const visibleItems = this.getVisibleFileItems();
+            if (visibleItems.length === 0) return;
+
+            // Prevent default scrolling while navigating
+            e.preventDefault();
+
+            if (isEnter) {
+                if (this.focusIndex >= 0 && this.focusIndex < visibleItems.length) {
+                    const item = visibleItems[this.focusIndex];
+                    const path = item.dataset.path;
+                    const name = item.dataset.name;
+                    this.loadMarkdownFile(path, name);
                 }
+                return;
             }
+
+            if (this.focusIndex === -1) {
+                // Initialize focus on first/last based on key
+                const startIndex = isArrowDown ? 0 : visibleItems.length - 1;
+                this.applyFocusAtIndex(startIndex, visibleItems);
+                // Automatically open selected item
+                const startItem = visibleItems[startIndex];
+                this.openItemIfNotCurrent(startItem);
+                return;
+            }
+
+            let nextIndex = this.focusIndex + (isArrowDown ? 1 : -1);
+            nextIndex = Math.max(0, Math.min(visibleItems.length - 1, nextIndex));
+            this.applyFocusAtIndex(nextIndex, visibleItems);
+            // Automatically open selected item
+            const nextItem = visibleItems[nextIndex];
+            this.openItemIfNotCurrent(nextItem);
         });
         
         // Focus file tree when clicked
         this.fileTree.addEventListener('click', () => {
             this.fileTree.focus();
         });
+    }
+
+    openItemIfNotCurrent(item) {
+        if (!item) return;
+        const path = item.dataset.path;
+        const name = item.dataset.name;
+        if (!path) return;
+        if (!this.currentFile || this.currentFile.path !== path) {
+            this.loadMarkdownFile(path, name);
+        }
+    }
+
+    getVisibleFileItems() {
+        const allItems = Array.from(this.fileTree.querySelectorAll('.file-item'));
+        return allItems.filter(el => el.offsetParent !== null);
+    }
+
+    applyFocusAtIndex(index, items = null) {
+        const visibleItems = items || this.getVisibleFileItems();
+        if (visibleItems.length === 0) return;
+        const boundedIndex = Math.max(0, Math.min(visibleItems.length - 1, index));
+        const item = visibleItems[boundedIndex];
+        this.setFocusedItem(item);
+        // Update index to match current visible sequence
+        this.focusIndex = boundedIndex;
+    }
+
+    setFocusedItem(item) {
+        // Remove previous focus state
+        this.fileTree.querySelectorAll('.file-item.focused').forEach(el => el.classList.remove('focused'));
+        if (!item) {
+            this.focusIndex = -1;
+            this.focusedPath = null;
+            return;
+        }
+        item.classList.add('focused');
+        this.focusedPath = item.dataset.path || null;
+        // Sync focus index with current visible ordering
+        const visibleItems = this.getVisibleFileItems();
+        this.focusIndex = visibleItems.indexOf(item);
+        this.scrollItemIntoView(item);
+    }
+
+    scrollItemIntoView(item) {
+        if (!item) return;
+        const container = this.fileTree;
+        const itemRect = item.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        if (itemRect.top < containerRect.top) {
+            item.scrollIntoView({ block: 'nearest' });
+        } else if (itemRect.bottom > containerRect.bottom) {
+            item.scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    restoreFocusAfterRender() {
+        const visibleItems = this.getVisibleFileItems();
+        if (visibleItems.length === 0) {
+            this.focusIndex = -1;
+            this.focusedPath = null;
+            return;
+        }
+
+        // Try to restore previously focused path
+        if (this.focusedPath) {
+            const match = visibleItems.find(el => el.dataset.path === this.focusedPath);
+            if (match) {
+                this.setFocusedItem(match);
+                return;
+            }
+        }
+
+        // If a file is active, focus it
+        const active = visibleItems.find(el => el.classList.contains('active'));
+        if (active) {
+            this.setFocusedItem(active);
+            return;
+        }
+
+        // Otherwise, leave focus unset until user interacts
+        this.setFocusedItem(null);
     }
     
     addPopoverListeners(fileItem) {
@@ -390,6 +503,10 @@ class MarkdownViewer {
             item.classList.remove('active');
             if (item.dataset.path === path) {
                 item.classList.add('active');
+                // Optionally sync focus with active selection if none focused
+                if (this.focusIndex === -1) {
+                    this.setFocusedItem(item);
+                }
             }
         });
     }
