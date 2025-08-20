@@ -1,6 +1,6 @@
 {
   "name": "minimal-markdown-viewer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Markdown file viewer for local documentation",
   "main": "server.js",
   "scripts": {

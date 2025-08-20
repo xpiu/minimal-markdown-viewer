@@ -486,7 +486,11 @@ class MarkdownViewer {
             }
             
             const markdown = await response.text();
-            const html = marked.parse(markdown);
+            
+            // Process image paths to be relative to the markdown file's directory
+            const processedMarkdown = this.processImagePaths(markdown, path);
+            
+            const html = marked.parse(processedMarkdown);
             
             this.markdownViewer.innerHTML = `<div class="markdown-content">${html}</div>`;
             this.currentFile = { path, name };
@@ -622,6 +626,40 @@ class MarkdownViewer {
         if (savedWidth) {
             sidebar.style.width = savedWidth;
         }
+    }
+
+    processImagePaths(markdown, filePath) {
+        // Extract the directory path from the markdown file path
+        const fileDir = this.getFileDirectory(filePath);
+        
+        // If the file is in the root directory, no need to process paths
+        if (fileDir === '/') {
+            return markdown;
+        }
+        
+        // Process markdown image syntax: ![alt](path)
+        // This regex matches both standard and reference-style image syntax
+        return markdown.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, alt, imgPath) => {
+            // Skip processing if the path is already absolute or a full URL
+            if (imgPath.startsWith('http://') || imgPath.startsWith('https://') || imgPath.startsWith('/')) {
+                return match;
+            }
+            
+            // Resolve relative path to the markdown file's directory
+            // Remove leading slash from fileDir to avoid double slashes
+            const cleanFileDir = fileDir.startsWith('/') ? fileDir.substring(1) : fileDir;
+            const resolvedPath = cleanFileDir ? `/${cleanFileDir}/${imgPath}` : `/${imgPath}`;
+            return `![${alt}](${resolvedPath})`;
+        });
+    }
+    
+    getFileDirectory(filePath) {
+        // Remove the filename to get the directory path
+        const lastSlashIndex = filePath.lastIndexOf('/');
+        if (lastSlashIndex === 0) {
+            return '/'; // Root directory
+        }
+        return filePath.substring(0, lastSlashIndex);
     }
 }
 
